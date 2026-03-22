@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dhairya Singh Dhaila</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --black:#080808;--white:#f0ede6;--red:#c8382a;--amber:#e8a020;--teal:#1d9e75;
+  --mono:'DM Mono',monospace;--sans:'DM Sans',sans-serif;--display:'Bebas Neue',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:var(--sans);font-weight:300;line-height:1.6;overflow-x:hidden;cursor:none}
+ 
+#cur{position:fixed;width:10px;height:10px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s;mix-blend-mode:difference}
+#cur.big{width:40px;height:40px}
+ 
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.025) 2px,rgba(0,0,0,.025) 4px);pointer-events:none;z-index:998}
+ 
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:6vw;position:relative;overflow:hidden}
+#hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(200,56,42,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(200,56,42,.06) 1px,transparent 1px);background-size:60px 60px;animation:gs 20s linear infinite}
+@keyframes gs{0%{transform:translate(0,0)}100%{transform:translate(60px,60px)}}
+#hero-bg-num{font-family:var(--display);font-size:clamp(120px,22vw,300px);line-height:.88;color:transparent;-webkit-text-stroke:1px rgba(200,56,42,.12);position:absolute;top:-.05em;right:-.02em;pointer-events:none;user-select:none;letter-spacing:-.02em}
+ 
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--red);margin-bottom:1.5rem;opacity:0;animation:fu .8s .2s forwards}
+.hero-name{font-family:var(--display);font-size:clamp(52px,10vw,130px);line-height:.92;letter-spacing:.01em;opacity:0;animation:fu .9s .4s forwards}
+.hero-name em{font-style:normal;color:var(--red)}
+.hero-desc{display:flex;align-items:center;gap:2rem;margin-top:2rem;opacity:0;animation:fu .9s .7s forwards}
+.hero-desc p{font-size:clamp(14px,1.8vw,18px);max-width:480px;color:rgba(240,237,230,.6);line-height:1.7}
+.hero-line{flex-shrink:0;width:60px;height:1px;background:var(--red)}
+.hero-cta{display:flex;gap:1.5rem;margin-top:3rem;flex-wrap:wrap;opacity:0;animation:fu .9s 1s forwards}
+.scroll-ind{position:absolute;bottom:2.5rem;right:6vw;font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,237,230,.3);display:flex;align-items:center;gap:1rem;opacity:0;animation:fu .9s 1.3s forwards}
+.scroll-ind::before{content:'';display:block;width:1px;height:40px;background:rgba(240,237,230,.15);animation:li 2s 1.5s ease-in-out infinite}
+@keyframes li{0%,100%{opacity:.15}50%{opacity:.5}}
+@keyframes fu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+ 
+/* BUTTONS */
+.btn{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;padding:14px 28px;border:1px solid currentColor;background:transparent;color:var(--white);text-decoration:none;cursor:none;transition:background .2s,color .2s;position:relative;overflow:hidden;display:inline-block}
+.btn::after{content:'';position:absolute;inset:0;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.16,1,.3,1);z-index:-1}
+.btn:hover::after{transform:scaleX(1)}
+.btn:hover{color:var(--white);border-color:var(--red)}
+.btn.dim{border-color:rgba(240,237,230,.2)}
+ 
+/* TICKER */
+.ticker{border-top:1px solid rgba(200,56,42,.3);border-bottom:1px solid rgba(200,56,42,.3);padding:12px 0;overflow:hidden;background:rgba(200,56,42,.05)}
+.ticker-inner{display:flex;white-space:nowrap;animation:tk 28s linear infinite}
+.tick{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--red);padding:0 3rem;flex-shrink:0}
+.tick::after{content:'◆';margin-left:3rem}
+@keyframes tk{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+ 
+/* SECTIONS */
+section{padding:clamp(60px,10vw,140px) 6vw}
+.sec-label{font-family:var(--mono);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(240,237,230,.3);margin-bottom:1rem;display:flex;align-items:center;gap:1rem}
+.sec-label::before{content:attr(data-n);color:var(--red)}
+.sec-title{font-family:var(--display);font-size:clamp(44px,7vw,96px);line-height:.92;letter-spacing:.01em;margin-bottom:clamp(40px,6vw,80px)}
+ 
+/* MISSION */
+#mission{border-top:1px solid rgba(240,237,230,.06)}
+.mission-text{font-family:var(--display);font-size:clamp(28px,4.5vw,64px);line-height:1.05;max-width:900px}
+.mission-text .acc{color:var(--red)}
+.mission-stats{margin-top:3rem;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;max-width:800px}
+.m-stat{border-left:2px solid var(--red);padding-left:1.5rem}
+.m-stat .num{font-family:var(--display);font-size:48px;line-height:1}
+.m-stat .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,237,230,.4);margin-top:.4rem}
+ 
+/* PROJECTS */
+#projects{border-top:1px solid rgba(240,237,230,.06)}
+.pgrid{display:flex;flex-direction:column;gap:1px;background:rgba(240,237,230,.06);border:1px solid rgba(240,237,230,.06)}
+ 
+.pcard{background:var(--black);padding:clamp(28px,4vw,56px);display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;position:relative;overflow:hidden;transition:background .3s;cursor:none}
+.pcard:hover{background:#0e0e0e}
+.pcard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--red),transparent);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.pcard:hover::before{transform:scaleX(1)}
+ 
+.p-num{font-family:var(--mono);font-size:10px;letter-spacing:.25em;color:var(--red);margin-bottom:1.5rem}
+.p-name{font-family:var(--display);font-size:clamp(28px,3.2vw,52px);line-height:.95;margin-bottom:.8rem;letter-spacing:.02em;word-break:keep-all}
+.p-tagline{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:1.5rem;line-height:1.6}
+.p-desc{font-size:14px;color:rgba(240,237,230,.55);line-height:1.75;margin-bottom:1.5rem}
+.p-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1.5rem}
+.tag{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;padding:5px 10px;border:1px solid rgba(240,237,230,.12);color:rgba(240,237,230,.4)}
+.p-metric{font-family:var(--display);font-size:40px;color:var(--red);line-height:1}
+.p-metric-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,237,230,.3);margin-top:4px}
+.p-metrics{display:flex;gap:2rem;margin-bottom:1.5rem}
+ 
+.term{background:#0a0a0a;border:1px solid rgba(240,237,230,.08);padding:1.25rem;font-family:var(--mono);font-size:12px;color:rgba(240,237,230,.5);line-height:2;margin-bottom:1.5rem}
+.term .pr{color:var(--teal)}.term .cm{color:var(--white)}.term .ou{color:rgba(240,237,230,.35)}.term .fl{color:var(--amber)}
+ 
+.p-link{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,237,230,.35);text-decoration:none;display:flex;align-items:center;gap:.8rem;transition:color .2s;cursor:none;padding-top:1.5rem;border-top:1px solid rgba(240,237,230,.06)}
+.p-link:hover{color:var(--white)}
+.p-link::after{content:'→'}
+ 
+/* CAI BLOCKS */
+.cai{display:flex;flex-direction:column;gap:1rem}
+.cb{padding:1.25rem;border:1px solid rgba(240,237,230,.06);background:rgba(240,237,230,.02)}
+.cb h4{font-family:var(--mono);font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--red);margin-bottom:.7rem}
+.cb p{font-size:13px;color:rgba(240,237,230,.5);line-height:1.75}
+ 
+/* STACK */
+#stack{border-top:1px solid rgba(240,237,230,.06)}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1px;background:rgba(240,237,230,.06)}
+.si{background:var(--black);padding:1.5rem;transition:background .2s}
+.si:hover{background:#0d0d0d}
+.si .lg{font-family:var(--display);font-size:28px;line-height:1;margin-bottom:.5rem}
+.si .ll{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,237,230,.3)}
+.si .lb{margin-top:1rem;height:1px;background:rgba(240,237,230,.08);position:relative;overflow:hidden}
+.si .lb::after{content:'';position:absolute;top:0;left:0;height:100%;background:var(--red);width:var(--p);animation:bg 1.2s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes bg{from{width:0}to{width:var(--p)}}
+ 
+/* PHILOSOPHY */
+#philosophy{border-top:1px solid rgba(240,237,230,.06);display:grid;grid-template-columns:1fr 1fr;gap:6vw;align-items:center}
+.ph-quote{font-family:var(--display);font-size:clamp(28px,4vw,56px);line-height:1.05}
+.ph-quote em{font-style:normal;color:var(--red)}
+.ph-items{display:flex;flex-direction:column;gap:2rem}
+.ph-item{display:grid;grid-template-columns:40px 1fr;gap:1.5rem;align-items:start}
+.ph-n{font-family:var(--mono);font-size:10px;letter-spacing:.15em;color:var(--red);padding-top:3px}
+.ph-item h3{font-size:15px;font-weight:500;margin-bottom:.4rem}
+.ph-item p{font-size:13px;color:rgba(240,237,230,.45);line-height:1.7}
+ 
+/* CTA */
+#cta{border-top:1px solid rgba(200,56,42,.3);text-align:center;position:relative;overflow:hidden;padding:clamp(60px,10vw,140px) 6vw}
+#cta::before{content:'PARTNER';font-family:var(--display);font-size:clamp(80px,18vw,260px);color:transparent;-webkit-text-stroke:1px rgba(200,56,42,.06);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;letter-spacing:.05em}
+.cta-lbl{font-family:var(--mono);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);margin-bottom:2rem}
+.cta-title{font-family:var(--display);font-size:clamp(40px,7vw,100px);line-height:.95;margin-bottom:2rem}
+.cta-sub{font-size:15px;color:rgba(240,237,230,.45);max-width:560px;margin:0 auto 3rem;line-height:1.75}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+ 
+/* FOOTER */
+footer{border-top:1px solid rgba(240,237,230,.06);padding:2.5rem 6vw;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.foot-name{font-family:var(--mono);font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:rgba(240,237,230,.25)}
+.foot-links{display:flex;gap:2rem}
+.foot-links a{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,237,230,.25);text-decoration:none;transition:color .2s}
+.foot-links a:hover{color:var(--white)}
+ 
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+ 
+@media(max-width:768px){
+  .pcard{grid-template-columns:1fr}
+  #philosophy{grid-template-columns:1fr}
+  .mission-stats{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+ 
+<div id="cur"></div>
+ 
+<!-- HERO -->
+<section id="hero">
+  <div id="hero-grid"></div>
+  <div id="hero-bg-num">26</div>
+  <p class="eyebrow">Dhairya Singh Dhaila &nbsp;·&nbsp; Class of 2026 &nbsp;·&nbsp; India</p>
+  <h1 class="hero-name">I BUILD<br><em>SHIELDS.</em></h1>
+  <div class="hero-desc">
+    <div class="hero-line"></div>
+    <p>The most dangerous vulnerabilities aren't in systems — they're in the people systems were built to ignore. I deploy solutions at the intersection of AI integrity, human safety, and civic accountability.</p>
+  </div>
+  <div class="hero-cta">
+    <a href="#projects" class="btn">View Work</a>
+    <a href="https://github.com/Ch4lkP0wd3r" target="_blank" class="btn dim">GitHub</a>
+    <a href="http://meridin.co.in" target="_blank" class="btn dim">Meridin &amp; Co™</a>
+  </div>
+  <div class="scroll-ind">Scroll</div>
+</section>
+ 
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="tick">Deepfake Detection</span><span class="tick">AES-256 Encryption</span><span class="tick">Financial Crime AI</span><span class="tick">W3C Verifiable Credentials</span><span class="tick">Graph Analytics</span><span class="tick">Civic Technology</span><span class="tick">PyTorch · OpenCV · XGBoost</span><span class="tick">MOSIP Decode 2025</span>
+    <span class="tick">Deepfake Detection</span><span class="tick">AES-256 Encryption</span><span class="tick">Financial Crime AI</span><span class="tick">W3C Verifiable Credentials</span><span class="tick">Graph Analytics</span><span class="tick">Civic Technology</span><span class="tick">PyTorch · OpenCV · XGBoost</span><span class="tick">MOSIP Decode 2025</span>
+  </div>
+</div>
+ 
+<!-- MISSION -->
+<section id="mission">
+  <div class="sec-label" data-n="00">Mission</div>
+  <div class="mission-text reveal">Technology should be a <span class="acc">shield</span> before it is a product. Every line of code I write answers to one question: who does this protect?</div>
+  <div class="mission-stats reveal">
+    <div class="m-stat"><div class="num">5</div><div class="lbl">Deployed Projects</div></div>
+    <div class="m-stat"><div class="num">94%</div><div class="lbl">Deepfake Accuracy</div></div>
+    <div class="m-stat"><div class="num">13</div><div class="lbl">Public Repos</div></div>
+    <div class="m-stat"><div class="num">AES</div><div class="lbl">256-bit Encryption</div></div>
+  </div>
+</section>
+ 
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="sec-label" data-n="01">Projects</div>
+  <h2 class="sec-title reveal">DEPLOYED<br>WORK.</h2>
+  <div class="pgrid">
+ 
+    <!-- 01 PROJECT PHOENIX -->
+    <div class="pcard reveal">
+      <div>
+        <div class="p-num">01</div>
+        <h3 class="p-name">PROJECT PHOENIX</h3>
+        <div class="p-tagline">Defending Digital Truth · Deepfake Detection · Edge AI · NPU Optimization</div>
+        <p class="p-desc">A deepfake detection pipeline optimized for Neural Processing Units — eliminating the cloud dependency that makes real-time detection impractical in high-risk environments.</p>
+        <div class="p-tags">
+          <span class="tag">PyTorch</span><span class="tag">OpenCV</span><span class="tag">ONNX Runtime</span><span class="tag">INT8 Quantization</span><span class="tag">CNN-Transformer</span>
+        </div>
+        <div class="p-metric">94%</div>
+        <div class="p-metric-lbl">Real-time accuracy · Sub-200ms latency</div>
+        <a href="https://github.com/Ch4lkP0wd3r/Project_Phoenix" target="_blank" class="p-link">View Repository</a>
+      </div>
+      <div class="cai">
+        <div class="cb">
+          <h4>Challenge</h4>
+          <p>By 2026, synthetic media has dissolved the baseline of epistemic trust. Existing detection pipelines are cloud-dependent, latency-heavy, and inaccessible to journalists, activists, and election monitors who need them most. The bottleneck is not intelligence — it is infrastructure.</p>
+        </div>
+        <div class="cb">
+          <h4>Action</h4>
+          <p>Implemented INT8 post-training quantization to compress the model footprint without sacrificing accuracy — a tradeoff requiring simultaneous understanding of hardware constraints and the model's loss landscape. Designed a hybrid CNN-Transformer backbone capturing both spatial artifacts and temporal drift across frame sequences, then exported to ONNX Runtime for NPU-targeted deployment.</p>
+        </div>
+        <div class="cb">
+          <h4>Impact</h4>
+          <p>94% real-time detection accuracy under edge constraints. Sub-200ms inference latency — viable for live video fact-checking. Detection triggers a confidence score, not an accusation, preserving presumption of innocence while flagging risk. Truth is an engineering problem. This is the solution.</p>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- 02 CALCPRO -->
+    <div class="pcard reveal">
+      <div>
+        <div class="p-num">02</div>
+        <h3 class="p-name">CALCPRO</h3>
+        <div class="p-tagline">Engineering for the Vulnerable · Mobile Security · AES-256 · Stealth UX</div>
+        <p class="p-desc">An encrypted evidence vault for domestic violence victims, disguised as a native calculator. The threat model is intimate — security designed adversarially against a human attacker, not just a system.</p>
+        <div class="p-tags">
+          <span class="tag">TypeScript</span><span class="tag">AES-256</span><span class="tag">Duress PIN</span><span class="tag">Section 65B</span><span class="tag">Mimicry UX</span>
+        </div>
+        <div class="term">
+          <span class="pr">vault://</span> <span class="cm">authenticate --pin [REDACTED]</span><br>
+          <span class="ou">[VAULT] AES-256-GCM unlocked</span><br>
+          <span class="fl">[DURESS] Alternate PIN → silent purge + decoy</span><br>
+          <span class="ou">[OPSEC] No forensic trace. No network calls.</span>
+        </div>
+        <a href="https://github.com/Ch4lkP0wd3r/CalcPro" target="_blank" class="p-link">View Repository</a>
+      </div>
+      <div class="cai">
+        <div class="cb">
+          <h4>Challenge</h4>
+          <p>Domestic violence victims face a paradox no mainstream safety app has solved: the device is both the lifeline and the evidence. Abusers conduct phone checks. Visible safety apps get deleted — or worse, escalate danger. The threat model is intimate, requiring security posture designed against a human adversary with physical access.</p>
+        </div>
+        <div class="cb">
+          <h4>Action</h4>
+          <p>Implemented AES-256-GCM encryption for all stored media. Engineered a mimicry layer — the app's UI, icon metadata, and process name present zero forensic signature distinguishable from a native calculator. Added a duress PIN system: one PIN opens the vault, an alternate PIN purges silently and loads a decoy session — borrowed from intelligence tradecraft, adapted for civilian safety.</p>
+        </div>
+        <div class="cb">
+          <h4>Impact</h4>
+          <p>Deliberately omitted a "report" button — because in many cases, reporting is itself dangerous. The app's power is documentation without disclosure. Positioned for NGO partnership and pilot deployment. A proof-of-concept for what the security community calls defensive privacy engineering — a discipline that elite programs are only beginning to formalize.</p>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- 03 SYNAPSE -->
+    <div class="pcard reveal">
+      <div>
+        <div class="p-num">03</div>
+        <h3 class="p-name">SYNAPSE</h3>
+        <div class="p-tagline">Following the Money · Financial Crime AI · ML Ensemble · Graph Analytics</div>
+        <p class="p-desc">A research-grade AI system detecting money laundering, structuring, and anomalous transactions using ML ensembles, graph analytics, and geographic risk intelligence.</p>
+        <div class="p-tags">
+          <span class="tag">XGBoost</span><span class="tag">LightGBM</span><span class="tag">NetworkX</span><span class="tag">Streamlit</span><span class="tag">SHA-256 Anon</span>
+        </div>
+        <div class="p-metrics">
+          <div><div class="p-metric" style="font-size:28px">10</div><div class="p-metric-lbl">Forensic Layers</div></div>
+          <div><div class="p-metric" style="font-size:28px">200+</div><div class="p-metric-lbl">Risk Indicators</div></div>
+          <div><div class="p-metric" style="font-size:28px">3</div><div class="p-metric-lbl">ML Models</div></div>
+        </div>
+        <a href="https://github.com/Ch4lkP0wd3r/SYNAPSE" target="_blank" class="p-link">View Repository</a>
+      </div>
+      <div class="cai">
+        <div class="cb">
+          <h4>Challenge</h4>
+          <p>Financial crime detection systems are either inaccessible black boxes or fragile rule-based engines that sophisticated actors trivially bypass. The gap is not data — it is multi-signal reasoning: combining statistical anomalies, graph topology, and geographic risk into a single explainable verdict.</p>
+        </div>
+        <div class="cb">
+          <h4>Action</h4>
+          <p>Built a modular intelligence framework evaluating every transaction across 10 forensic layers — transactional behavior, geographic proximity to concealment zones, temporal burst patterns, multi-hop graph layering paths, and 200+ composite risk indicators. Trained a supervised ensemble (XGBoost + LightGBM + Random Forest). All PII hashed with SHA-256 at ingestion — the system flags risk without ever handling identity.</p>
+        </div>
+        <div class="cb">
+          <h4>Impact</h4>
+          <p>Every flag accompanied by a forensic narrative explaining the "why" — not just a score, but a human-readable audit trail exportable as structured JSON. Validated with a performance benchmark suite. Research-grade tooling built by a pre-university developer, before any institutional access to compute or mentorship.</p>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- 04 AGRIQCERT -->
+    <div class="pcard reveal">
+      <div>
+        <div class="p-num">04</div>
+        <h3 class="p-name">AGRIQCERT</h3>
+        <div class="p-tagline">Trust as Infrastructure · W3C Verifiable Credentials · MOSIP · Digital Identity</div>
+        <p class="p-desc">A government-grade Digital Product Passport platform for agricultural imports/exports. Built for MOSIP Decode 2025. 100% of mandatory tasks + all bonus deliverables. Live and deployed.</p>
+        <div class="p-tags">
+          <span class="tag">TypeScript</span><span class="tag">MOSIP Inji</span><span class="tag">W3C JSON-LD</span><span class="tag">Supabase</span><span class="tag">Multilingual</span>
+        </div>
+        <div class="term">
+          <span class="pr">inji://</span> <span class="cm">issue-credential --schema DPP_v1</span><br>
+          <span class="ou">[DID] did:mosip:collab:issuer resolved</span><br>
+          <span class="ou">[VC] W3C JSON-LD generated + signed</span><br>
+          <span class="fl">[LIVE] agriqcertmosip.vercel.app</span>
+        </div>
+        <a href="https://github.com/Ch4lkP0wd3r/AgriQCert" target="_blank" class="p-link">View Repository</a>
+      </div>
+      <div class="cai">
+        <div class="cb">
+          <h4>Challenge</h4>
+          <p>Agricultural supply chains suffer from a trust collapse at every handoff — exporter to QA agency to importer. Paper certificates are forged, chemical tests are ignored, and importers have no mechanism to verify provenance. The problem is not data — it is the absence of a tamper-proof, globally verifiable trust layer between producers and markets.</p>
+        </div>
+        <div class="cb">
+          <h4>Action</h4>
+          <p>Implemented a serverless reference architecture against MOSIP's live Inji stack — acting as a real Postgres Data Provider for VC issuance. Generated W3C-compliant JSON-LD Digital Product Passports using the DigitalProductPassport_v1 schema, deep-linked to the real Inji Web Wallet. Built revocation control, a Farm-to-Fork traceability tree, multilingual support across 5 languages, and an immutable verification audit log.</p>
+        </div>
+        <div class="cb">
+          <h4>Impact</h4>
+          <p>Completed 100% of mandatory hackathon deliverables plus all bonus tasks. Deployed live. Demonstrated that a pre-university developer can ship production-grade digital identity infrastructure against a real government sandbox — not a mock, not a simulation, a live integration recognized by MOSIP's international jury.</p>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- 05 GUARDIAN BOT -->
+    <div class="pcard reveal">
+      <div>
+        <div class="p-num">05</div>
+        <h3 class="p-name">GUARDIAN BOT</h3>
+        <div class="p-tagline">Bridging the Legal-Tech Gap · Civic AI · Cybercrime Triage · NLP · Meridin &amp; Co™</div>
+        <p class="p-desc">An intelligent conversational system guiding cybercrime victims through the reporting process in real time. Mapped to India's IT Act, IPC sections, and CERT-In protocols. Zero-trust — the bot never stores victim data.</p>
+        <div class="p-tags">
+          <span class="tag">Python</span><span class="tag">NLP</span><span class="tag">IT Act</span><span class="tag">CERT-In</span><span class="tag">Zero-Trust</span>
+        </div>
+        <div class="term">
+          <span class="pr">guardian@meridin:~$</span> <span class="cm">triage --incident "phishing"</span><br>
+          <span class="ou">[LEG] IT Act §66D + IPC §420 applicable</span><br>
+          <span class="ou">[EV] Evidence checklist: 7 items generated</span><br>
+          <span class="fl">[ROUTE] CERT-In report template ready</span><br>
+          <span class="ou">[PRIV] Session data: not stored.</span>
+        </div>
+        <a href="https://github.com/Ch4lkP0wd3r/CyberRescueBot" target="_blank" class="p-link">View Repository</a>
+      </div>
+      <div class="cai">
+        <div class="cb">
+          <h4>Challenge</h4>
+          <p>Cybercrime reporting in India fails at the first step: victims don't know what constitutes a reportable offense, which jurisdiction applies, or what evidence to preserve. Law enforcement receives incomplete reports. Cases collapse before investigation begins. The gap is not legal — it is informational, and informational gaps are engineering problems.</p>
+        </div>
+        <div class="cb">
+          <h4>Action</h4>
+          <p>Built Guardian Bot's reasoning layer on a decision tree mapped to India's IT Act provisions, IPC sections, and CERT-In protocols — translating legal complexity into plain-language guidance. Integrated dynamic evidence checklist generation: case-specific lists of what to screenshot, preserve, and timestamp before filing. Zero-trust input — no session data ever stored, so the tool cannot itself become a liability to victims.</p>
+        </div>
+        <div class="cb">
+          <h4>Impact</h4>
+          <p>Founded Meridin &amp; Co™ as the civic-tech organization behind the initiative — an operational entity, not a school project. Recruited a cross-functional peer team, validated legal accuracy with student legal aid communities. Meridin &amp; Co™ has a growth roadmap extending into university, where research infrastructure can scale what community resources started.</p>
+        </div>
+      </div>
+    </div>
+ 
+  </div>
+</section>
+ 
+<!-- STACK -->
+<section id="stack">
+  <div class="sec-label" data-n="02">Tech Stack</div>
+  <h2 class="sec-title reveal">THE<br>ARSENAL.</h2>
+  <div class="sgrid reveal">
+    <div class="si"><div class="lg">Py</div><div class="ll">Python</div><div class="lb" style="--p:92%"></div></div>
+    <div class="si"><div class="lg">TS</div><div class="ll">TypeScript</div><div class="lb" style="--p:80%"></div></div>
+    <div class="si"><div class="lg">Kt</div><div class="ll">Kotlin</div><div class="lb" style="--p:65%"></div></div>
+    <div class="si"><div class="lg">Rs</div><div class="ll">Rust</div><div class="lb" style="--p:55%"></div></div>
+    <div class="si"><div class="lg">C++</div><div class="ll">C Plus Plus</div><div class="lb" style="--p:60%"></div></div>
+    <div class="si"><div class="lg">JS</div><div class="ll">JavaScript</div><div class="lb" style="--p:78%"></div></div>
+    <div class="si"><div class="lg">Pt</div><div class="ll">PyTorch</div><div class="lb" style="--p:75%"></div></div>
+    <div class="si"><div class="lg">Tf</div><div class="ll">TensorFlow</div><div class="lb" style="--p:68%"></div></div>
+    <div class="si"><div class="lg">Rx</div><div class="ll">React Native</div><div class="lb" style="--p:72%"></div></div>
+    <div class="si"><div class="lg">Fb</div><div class="ll">Firebase</div><div class="lb" style="--p:80%"></div></div>
+    <div class="si"><div class="lg">Pg</div><div class="ll">PostgreSQL</div><div class="lb" style="--p:70%"></div></div>
+    <div class="si"><div class="lg">Cf</div><div class="ll">Cloudflare</div><div class="lb" style="--p:65%"></div></div>
+  </div>
+</section>
+ 
+<!-- PHILOSOPHY -->
+<section id="philosophy">
+  <div>
+    <div class="sec-label" data-n="03">Philosophy</div>
+    <div class="ph-quote reveal">"Empathy is not a soft skill. When implemented correctly, it is an <em>encryption protocol.</em>"</div>
+  </div>
+  <div class="ph-items reveal">
+    <div class="ph-item"><div class="ph-n">01</div><div><h3>Build For The Overlooked</h3><p>Every project targets a population mainstream technology abandoned: abuse victims, cybercrime victims, farmers in broken trust chains, populations under epistemic attack.</p></div></div>
+    <div class="ph-item"><div class="ph-n">02</div><div><h3>Deploy, Don't Demo</h3><p>A prototype that doesn't ship is a thought experiment. Every project I build is either live, submitted to a real platform, or actively operational in a community context.</p></div></div>
+    <div class="ph-item"><div class="ph-n">03</div><div><h3>Ethics Are Architecture</h3><p>Privacy, explainability, and adversarial threat modeling are not compliance checkboxes — they are design constraints that precede every line of code.</p></div></div>
+    <div class="ph-item"><div class="ph-n">04</div><div><h3>The Scholarship Is a Partnership</h3><p>I am not seeking funding. I am seeking the research infrastructure to scale what I've already started. The university provides the platform. I provide the innovation.</p></div></div>
+  </div>
+</section>
+ 
+<!-- CTA -->
+<section id="cta">
+  <p class="cta-lbl reveal">Research Partnership · Class of 2026</p>
+  <h2 class="cta-title reveal">LET'S<br>BUILD.</h2>
+  <p class="cta-sub reveal">I don't wait for permission to identify a problem. I don't wait for a course to acquire a skill. I don't confuse a prototype with an outcome. I need the infrastructure to scale what I've already started.</p>
+  <div class="cta-btns reveal">
+    <a href="mailto:dhairya.dhaila@gmail.com" class="btn">dhairya.dhaila@gmail.com</a>
+    <a href="https://linkedin.com/in/ch4lkp0wd3r" target="_blank" class="btn dim">LinkedIn</a>
+    <a href="https://github.com/Ch4lkP0wd3r" target="_blank" class="btn dim">GitHub</a>
+    <a href="https://medium.com/@ch4lkp0wd3r" target="_blank" class="btn dim">Medium</a>
+  </div>
+</section>
+ 
+<!-- FOOTER -->
+<footer>
+  <div class="foot-name">© 2026 Dhairya Singh Dhaila · Founder, Meridin &amp; Co™</div>
+  <div class="foot-links">
+    <a href="https://github.com/Ch4lkP0wd3r" target="_blank">GitHub</a>
+    <a href="https://linkedin.com/in/ch4lkp0wd3r" target="_blank">LinkedIn</a>
+    <a href="http://meridin.co.in" target="_blank">Meridin</a>
+    <a href="https://medium.com/@ch4lkp0wd3r" target="_blank">Medium</a>
+  </div>
+</footer>
+ 
+<script>
+const cur = document.getElementById('cur');
+document.addEventListener('mousemove', e => { cur.style.left = e.clientX+'px'; cur.style.top = e.clientY+'px'; });
+document.querySelectorAll('a,button,.pcard,.si').forEach(el => {
+  el.addEventListener('mouseenter', () => cur.classList.add('big'));
+  el.addEventListener('mouseleave', () => cur.classList.remove('big'));
+});
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e,i) => { if(e.isIntersecting){ setTimeout(() => e.target.classList.add('visible'), i*80); obs.unobserve(e.target); } });
+}, {threshold:.08});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => { e.preventDefault(); document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'}); });
+});
+</script>
+</body>
+</html>
+ 
